@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <span class="brand">📘 Library Dashboard</span>
+  <button class="logout-btn" (click)="logout()">Logout</button>
+</nav>
+
+<div class="search-container">
+  <input
+    type="text" 
+    [(ngModel)]="searchText" 
+    placeholder="Search by title or author..." 
+    class="search-input"
+  />
+</div>
+
+<div class="dashboard">
+  <div class="book-card" *ngFor="let book of filteredBooks">
+    <img [src]="book.image" alt="{{ book.title }}" />
+    <h3>{{ book.title }}</h3>
+    <p>{{ book.author }}</p>
+    <div class="buttons">
+      <button 
+        [ngClass]="book.isIssued ? 'issued-btn' : 'issue-btn'" 
+        (click)="issueBook(book)">
+        {{ book.isIssued ? 'Issued' : 'Issue' }}
+      </button>
+
+      <button 
+        [ngClass]="book.isIssued ? 'return-btn-active' : 'return-btn'" 
+        (click)="returnBook(book)">
+        {{ book.isIssued ? 'Return' : 'Returned' }}
+      </button>
+    </div>
+  </div>
+</div>
+
